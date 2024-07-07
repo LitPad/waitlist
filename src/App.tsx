@@ -26,8 +26,8 @@ function App() {
           </div>
         </header>
         {/* hero */}
-        <div className="border border-[#F6F5F6] py-[60px] px-[15px] m-[16px] lg:p-[90px] lg:m-[50px] rounded-[36px] flex flex-col items-center">
-          <span className=" flex flex-wrap  items-center">
+        <div className="border border-[#F6F5F6] py-[60px] px-[15px] lg:p-[90px] mt-[70px] lg:m-[50px] rounded-[36px] flex flex-col items-center">
+          <span className=" flex flex-wrap justify-center  items-center">
             <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744]">
               Where writers
             </span>
@@ -64,13 +64,15 @@ function App() {
           </button>
         </div>
       </section>
-      <section className="h-[1352px] bg-gradient-to-b to-[#C198EC] from-[#FFFFFF] rounded-br-[60px] rounded-bl-[60px]">
-        <div className="border border-[#E0DEE3] bg-white m-[60px] flex flex-col rounded-[50px] py-[70px] px-[24px]">
+
+      {/* Cards */}
+      <section className="h-[1800px] lg:h-[1352px] bg-gradient-to-b to-[#C198EC] from-[#FFFFFF] rounded-bl-[32px] rounded-br-[32px] lg:rounded-br-[60px] lg:rounded-bl-[60px]">
+        <div className="border border-[#E0DEE3] bg-white mx-[16px] lg:m-[60px] flex flex-col rounded-[32px] lg:rounded-[50px] py-[36px] lg:py-[70px] lg:px-[24px]">
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-[32px] text-[#2B1744]">With LitPad</h2>
 
             {/* Cards */}
-            <div className="mt-[80px] flex items-center justify-between gap-[24px]">
+            <div className="mt-[40px] lg:mt-[80px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
               <HomeCard
                 icon="penTwo"
                 title="Autho-Friendly Platform"
@@ -92,14 +94,16 @@ function App() {
         </div>
         <div className="flex flex-col justify-center items-center mt-40">
           <div className="max-w-[500px]">
-            <h2 className="text-[56px] text-[#2B1744] font-[600] text-center">
+            <h2 className="text-[32px] lg:text-[56px] text-[#2B1744] font-[600] text-center">
               Get Early Access
             </h2>
-            <p className="text-[20px] text-[#2B1744] font-[500] text-center pt-4">
-              Welcome to the future of novels, crafted for authors and readers
-            </p>
+            <div className="px-20">
+              <p className="text-[15px] lg:text-[20px] text-[#2B1744] font-[500] text-center pt-4">
+                Welcome to the future of novels, crafted for authors and readers
+              </p>
+            </div>
           </div>
-          <div className="mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4">
+          <div className="mt-[40px] lg:mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4">
             <Input
               type="email"
               placeholder="Enter email"
@@ -122,19 +126,19 @@ function App() {
         </div>
       </section>
       <section className="bg-white mt-[70px] pt-[60px]">
-        <div className=" border-y mx-[60px] py-[24px] ">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-[24px]">
+        <div className=" border-y mx-[16px] lg:mx-[60px] py-[24px] ">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex flex-col md:flex-row items-center gap-[24px]">
               <img
                 src="/assets/images/logo.png"
                 alt="logo"
                 className="w-[125px] p-2 hover:cursor-pointer"
               />
-              <span className="text-[#2B1744] text-[18px] font-[500]">
+              <span className="text-[#2B1744] text-center text-[14px] md:text-[18px] font-[500]">
                 Write, read, and enjoy quality stories without limits
               </span>
             </div>
-            <div className="flex items-center gap-[20px]">
+            <div className="flex items-center gap-[20px] mt-[24px]">
               <img
                 src="/assets/icons/x.svg"
                 alt="logo"
@@ -159,7 +163,7 @@ function App() {
           </div>
         </div>
         <div className="flex items-center justify-center pt-[30px] pb-[100px]">
-          <span className="text-[#7F7589] text-[14px] font-[400]">
+          <span className="text-[#7F7589] text-[12px] lg:text-[14px] font-[400]">
             © 2024 All Rights reserved by LitPad
           </span>
         </div>
