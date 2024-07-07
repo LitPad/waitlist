@@ -13,7 +13,7 @@ function App() {
             className="w-[117px] lg:w-[125px] p-2 hover:cursor-pointer "
           />
           <Button className="bg-white text-[#120024] text-[14px] font-[500] py-[10px] px-[14px] rounded-full md:hidden">
-            Join Waitlist
+            Join Waitlistxx
           </Button>
 
           <div className="hidden gap-4 md:flex">
