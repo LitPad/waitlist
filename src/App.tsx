@@ -44,15 +44,15 @@ function App() {
             <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744] text-wrap pl-1">
               and readers
             </span>
-            <div className="bg-pink-gradient rounded-full px-[17px] py-[5px] lg:px-[23px] lg:py-[7px] flex items-center ml-2 lg:ml-[16px]">
+            <span className="bg-pink-gradient rounded-full px-[17px] py-[5px] lg:px-[23px] lg:py-[7px] flex items-center ml-2 lg:ml-[16px]">
               <img
                 src="/assets/icons/book.svg"
                 className="h-[20px] lg:h-[36px]"
                 alt="book "
               />
-            </div>
+            </span>
           </span>
-          <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744] items-end">
+          <span className="text-[26px] text-center md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744]">
             discover meaningful content
           </span>
           <p className="text-[#7F7589] text-[14px] lg:text-[18px] font-[500] mb-[24px] max-w-[510px] text-wrap text-center px-4 pt-10 ">
