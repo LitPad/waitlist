@@ -13,7 +13,7 @@ function App() {
             className="w-[117px] lg:w-[125px] p-2 hover:cursor-pointer "
           />
           <Button className="bg-white text-[#120024] text-[14px] font-[500] py-[10px] px-[14px] rounded-full md:hidden">
-            Join Waitlistxx
+            Join Waitlist
           </Button>
 
           <div className="hidden gap-4 md:flex">
@@ -72,7 +72,7 @@ function App() {
             <h2 className="text-[32px] text-[#2B1744]">With LitPad</h2>
 
             {/* Cards */}
-            <div className="mt-[40px] lg:mt-[80px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
+            <div className="mt-[40px] lg:mt-[80px] px-[16px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
               <HomeCard
                 icon="penTwo"
                 title="Autho-Friendly Platform"
@@ -92,32 +92,32 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center mt-40">
+        <div className="flex flex-col justify-center items-center mt-40 mx-3">
           <div className="max-w-[500px]">
             <h2 className="text-[32px] lg:text-[56px] text-[#2B1744] font-[600] text-center">
               Get Early Access
             </h2>
-            <div className="px-20">
+            <div className="px-10">
               <p className="text-[15px] lg:text-[20px] text-[#2B1744] font-[500] text-center pt-4">
                 Welcome to the future of novels, crafted for authors and readers
               </p>
             </div>
           </div>
-          <div className="mt-[40px] lg:mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4">
+          <div className="mt-[40px] w-full sm:w-[410px] lg:mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4">
             <Input
               type="email"
               placeholder="Enter email"
-              className="w-[362px] bg-[#F6F5F6] rounded-[46px] h-[44px]"
+              className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
             <Input
               type="email"
               placeholder="Enter name"
-              className="w-[362px] bg-[#F6F5F6] rounded-[46px] h-[44px]"
+              className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
             <Input
               type="email"
               placeholder="Choose genre"
-              className="w-[362px] bg-[#F6F5F6] rounded-[46px] h-[44px]"
+              className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
             <Button className="bg-btn-purple-gradient rounded-[46px] text-white">
               Join waitlist
