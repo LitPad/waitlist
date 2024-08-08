@@ -1,8 +1,56 @@
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import HomeCard from "./components/shared/HomeCard";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
+import axios from "axios";
 
 function App() {
+  const baseURL = "http://v2202406226596274174.quicksrv.de:8000/api/v1";
+
+  const [loading, setLoading] = useState(false);
+  const [updatingWaitList, setUpdatingWaitList] = useState(false);
+  const [version, setVersion] = useState(0);
+  const [bookGenre, setBookGenre] = useState([]);
+  const [waitlist, setWaitlist] = useState({
+    email: "",
+    name: "",
+    genre_slug: "",
+  });
+
+  useEffect(() => {
+    fetchBookGenre();
+    // return () => {
+    //   document.body.removeChild(script);
+    // };
+  }, []);
+
+  const fetchBookGenre = async () => {
+    setLoading(true);
+    const resonse = await axios.get(`${baseURL}/books/genres`);
+    setLoading(false);
+    setBookGenre(resonse.data.data);
+    console.log(resonse);
+  };
+
+  const handleJoinWaitlist = async () => {
+    console.log(waitlist);
+    try {
+      setUpdatingWaitList(true);
+      const response = await axios.post(`${baseURL}/waitlist`, waitlist);
+      // Clear input fields
+      setWaitlist({ email: "", name: "", genre_slug: "" });
+      toast.success(response.data.message);
+      setUpdatingWaitList(false);
+      setVersion((prevVersion) => prevVersion + 1);
+      console.log(response);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setUpdatingWaitList(false);
+      console.log(error);
+    }
+  };
+
   return (
     <main className="overflow-hidden">
       <section className="bg-gradient-to-b from-[#EBDCF9] to-[#FFFFFF] max-w h-[740px] px-4">
@@ -103,26 +151,50 @@ function App() {
               </p>
             </div>
           </div>
-          <div className="mt-[40px] w-full sm:w-[410px] lg:mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4">
+          <form
+            key={version}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleJoinWaitlist();
+            }}
+            className="mt-[40px] w-full sm:w-[410px] lg:mt-[50px] bg-white rounded-[20px] py-[24px] px-[20px] flex flex-col gap-4"
+          >
             <Input
+              onChange={(e) =>
+                setWaitlist({ ...waitlist, email: e.target.value })
+              }
               type="email"
               placeholder="Enter email"
               className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
             <Input
+              onChange={(e) =>
+                setWaitlist({ ...waitlist, name: e.target.value })
+              }
               type="email"
               placeholder="Enter name"
               className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
-            <Input
-              type="email"
-              placeholder="Choose genre"
-              className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
-            />
-            <Button className="bg-btn-purple-gradient rounded-[46px] text-white">
-              Join waitlist
+            <select
+              onChange={(e) =>
+                setWaitlist({ ...waitlist, genre_slug: e.target.value })
+              }
+              className="bg-[#F6F5F6] rounded-[46px] h-[44px] px-2 placeholder:text-muted-foreground text-[#2B1744] font-[500]"
+            >
+              <option>{loading ? "Loading..." : "Select genre"}</option>
+              {bookGenre.map((genre) => (
+                <option key={genre.slug} value={genre.slug}>
+                  {genre.name}
+                </option>
+              ))}
+            </select>
+            <Button
+              type="submit"
+              className="bg-btn-purple-gradient rounded-[46px] text-white"
+            >
+              {updatingWaitList ? "Loading..." : "Join Waitlist"}
             </Button>
-          </div>
+          </form>
         </div>
       </section>
       <section className="bg-white mt-[70px] pt-[60px]">
