@@ -47,7 +47,7 @@ function App() {
       setUpdatingWaitList(false);
       setVersion((prevVersion) => prevVersion + 1);
       console.log(response);
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.response.data.message);
       setUpdatingWaitList(false);
       console.log(error);
@@ -185,7 +185,7 @@ function App() {
               className="bg-[#F6F5F6] rounded-[46px] h-[44px] px-2 placeholder:text-muted-foreground text-[#2B1744] font-[500]"
             >
               <option>{loading ? "Loading..." : "Select genre"}</option>
-              {bookGenre.map((genre) => (
+              {bookGenre.map((genre: any) => (
                 <option key={genre.slug} value={genre.slug}>
                   {genre.name}
                 </option>
