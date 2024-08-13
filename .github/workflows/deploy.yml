@@ -60,6 +60,7 @@ jobs:
         sshpass -p "${{ secrets.SSH_PASSPHRASE }}" ssh -o StrictHostKeyChecking=no docker@${VPS_IP} << 'EOF'
           cd /waitlist
           docker-compose down
-          docker-compose up -d --build --remove-orphans
+          docker build -t my-vite-app .
+          docker run -p 5001:5001 my-vite-app          
           echo "Docker Compose executed"
         EOF
