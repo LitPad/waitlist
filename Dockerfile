@@ -26,7 +26,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 RUN sed -i 's/ listen  .*/ listen 5001;/' /etc/nginx/conf.d/default.conf
 
 # Expose the new port
-EXPOSE 5001
+EXPOSE 5000
 
 # Start nginx server
 CMD ["nginx", "-g", "daemon off;"]
