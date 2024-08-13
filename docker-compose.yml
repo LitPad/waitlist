@@ -1,0 +1,7 @@
+services:
+  vite:
+    build:
+      context: .
+      target: build
+    ports:
+      - "8080:8080"

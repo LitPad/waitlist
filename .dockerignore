@@ -1,0 +1,21 @@
+# Ignore node_modules
+node_modules
+npm-debug.log
+
+# Ignore Vite cache
+.vite
+
+# Ignore logs
+logs
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore the build output (if any)
+dist
+
+# Ignore git files
+.git
+.gitignore
