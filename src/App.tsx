@@ -35,6 +35,9 @@ function App() {
 
   const handleJoinWaitlist = async () => {
     console.log(waitlist);
+    if (!waitlist.email || !waitlist.name || !waitlist.genre_slug) {
+      return toast.error("All fields are required");
+    }
     try {
       setUpdatingWaitList(true);
       const response = await axios.post(`${baseURL}/waitlist`, waitlist);
