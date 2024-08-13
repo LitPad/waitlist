@@ -61,6 +61,6 @@ jobs:
           cd /waitlist
           docker-compose down
           docker build -t waitlist-app .
-          docker run -p 5001:5001 my-vite-app          
+          docker run -p 5001:5001 waitlist-app          
           echo "Docker Compose executed"
         EOF
