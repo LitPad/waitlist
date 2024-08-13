@@ -18,6 +18,4 @@ dist
 
 # Ignore git files
 .git
-.gitignore
-
-# 
+.gitignore 
