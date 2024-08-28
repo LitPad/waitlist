@@ -60,7 +60,6 @@ jobs:
         sshpass -p "${{ secrets.SSH_PASSPHRASE }}" ssh -o StrictHostKeyChecking=no docker@${VPS_IP} << 'EOF'
           cd /waitlist
           docker-compose down
-          docker build -t waitlist-app .
-          docker run -p 5001:5001 waitlist-app          
+          docker-compose up --build -d --remove-orphans
           echo "Docker Compose executed"
         EOF
