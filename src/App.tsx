@@ -174,7 +174,7 @@ function App() {
               onChange={(e) =>
                 setWaitlist({ ...waitlist, name: e.target.value })
               }
-              type="email"
+              type="name"
               placeholder="Enter name"
               className="bg-[#F6F5F6] rounded-[46px] h-[44px]"
             />
