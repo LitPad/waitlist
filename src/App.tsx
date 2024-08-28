@@ -126,7 +126,7 @@ function App() {
             <div className="mt-[40px] lg:mt-[80px] px-[16px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
               <HomeCard
                 icon="penTwo"
-                title="Autho-Friendly Platform"
+                title="Author-Friendly Platform"
                 description="Providing authors with tools and resources to publish, promote, and
           monetize their work while retainning creative control"
               />
