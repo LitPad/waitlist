@@ -6,7 +6,7 @@ import { Input } from "./components/ui/input";
 import axios from "axios";
 
 function App() {
-  const baseURL =  import.meta.env.VITE_API_URL;
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const [loading, setLoading] = useState(false);
   const [updatingWaitList, setUpdatingWaitList] = useState(false);
@@ -54,6 +54,13 @@ function App() {
     }
   };
 
+  const scrollToJoinWaitlist = () => {
+    const joinWaitlist = document.getElementById("joinWaitlist");
+    if (joinWaitlist) {
+      joinWaitlist.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className="overflow-hidden">
       <section className="bg-gradient-to-b from-[#EBDCF9] to-[#FFFFFF] max-w h-[740px] px-4">
@@ -63,7 +70,11 @@ function App() {
             alt="logo"
             className="w-[117px] lg:w-[125px] p-2 hover:cursor-pointer "
           />
-          <Button className="bg-white text-[#120024] text-[14px] font-[500] py-[10px] px-[14px] rounded-full md:hidden">
+          <Button
+            // onClick goto joinWaitlist id
+            onClick={scrollToJoinWaitlist}
+            className="bg-white text-[#120024] text-[14px] font-[500] py-[10px] px-[14px] rounded-full md:hidden"
+          >
             Join Waitlist
           </Button>
 
@@ -71,7 +82,10 @@ function App() {
             <button className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 ">
               About
             </button>
-            <button className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 ">
+            <button
+              onClick={scrollToJoinWaitlist}
+              className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 "
+            >
               Join waitlist
             </button>
           </div>
@@ -110,7 +124,10 @@ function App() {
             Empower authors with creative control, offer readers a diverse
             literacy experience, ensure transparency in revenue sharing
           </p>
-          <button className="bg-btn-purple-gradient rounded-full text-[#FFFFFF] text-[15px] font-[600] h-[46px] w-[135px] lg:h-[52px] lg:w-[136px] hover:bg-purple-600 mt-4 ">
+          <button
+            onClick={scrollToJoinWaitlist}
+            className="bg-btn-purple-gradient rounded-full text-[#FFFFFF] text-[15px] font-[600] h-[46px] w-[135px] lg:h-[52px] lg:w-[136px] hover:bg-purple-600 mt-4 "
+          >
             Join waitlist
           </button>
         </div>
@@ -143,7 +160,10 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center mt-40 mx-3">
+        <div
+          id="joinWaitlist"
+          className="flex flex-col justify-center items-center mt-40 mx-3"
+        >
           <div className="max-w-[500px]">
             <h2 className="text-[32px] lg:text-[56px] text-[#2B1744] font-[600] text-center">
               Get Early Access
