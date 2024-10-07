@@ -5,10 +5,12 @@ import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import axios from "axios";
 import SocialLink from "./components/shared/SocialLink";
+import WelcomeLitpadModal from "./components/shared/WelcomeLitpadModal";
 
 function App() {
   const baseURL = import.meta.env.VITE_API_URL;
 
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [updatingWaitList, setUpdatingWaitList] = useState(false);
   const [version, setVersion] = useState(0);
@@ -53,6 +55,7 @@ function App() {
       toast.success(response.data.message);
       setUpdatingWaitList(false);
       setVersion((prevVersion) => prevVersion + 1);
+      setOpenModal(true);
       console.log(response);
     } catch (error: any) {
       toast.error(error.response.data.message);
@@ -101,33 +104,23 @@ function App() {
         <div className="border border-[#F6F5F6] py-[60px] px-[15px] lg:p-[90px] mt-[70px] lg:m-[50px] rounded-[36px] flex flex-col items-center">
           <span className=" flex flex-wrap justify-center  items-center">
             <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744]">
-              Where writers
+              Discover Captivating Stories
             </span>
             <div className="bg-purple-gradient rounded-full px-[17px] py-[5px] lg:px-[23px] lg:py-[7px] flex items-center mx-2 lg:mx-[16px]">
               <img
-                src="/assets/icons/pen.svg"
+                src="/assets/icons/heroBook.svg"
                 className="h-[20px] lg:h-[36px]"
                 alt="pen "
               />
             </div>
             <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744] text-wrap text-center">
-              thrive
-            </span>
-            <span className="text-[26px] md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744] text-wrap pl-1">
-              and readers
-            </span>
-            <span className="bg-pink-gradient rounded-full px-[17px] py-[5px] lg:px-[23px] lg:py-[7px] flex items-center ml-2 lg:ml-[16px]">
-              <img
-                src="/assets/icons/book.svg"
-                className="h-[20px] lg:h-[36px]"
-                alt="book "
-              />
+              Across
             </span>
           </span>
           <span className="text-[26px] text-center md:text-[40px] xl:text-[56px] font-[600] text-[#2B1744]">
-            discover meaningful content
+            Genres You Love
           </span>
-          <p className="text-[#7F7589] text-[14px] lg:text-[18px] font-[500] mb-[24px] max-w-[510px] text-wrap text-center px-4 pt-10 ">
+          <p className="text-[#7F7589] text-[14px] lg:text-[18px] font-[500] mb-[24px] max-w-[550px] text-wrap text-center px-4 pt-10 ">
             LitPad offers you unlimited access to an ever-growing library of
             quality novels, all for one budget-friendly subscription
           </p>
@@ -151,18 +144,18 @@ function App() {
             {/* Cards */}
             <div className="mt-[40px] lg:mt-[80px] px-[16px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
               <HomeCard
-                icon="penTwo"
+                icon="l1"
                 title="Endless Adventures at Your Fingertips"
                 description="Unlock a vast collection of novels across multiple genres—romance, fantasy, thrillers, and more.
 "
               />
               <HomeCard
-                icon="bookTwo"
+                icon="l2"
                 title="Affordable Escapes for Every Reader"
                 description="Escaping into another world doesn’t have to be costly. LitPad offers a sea of stories for one affordable monthly subscription."
               />
               <HomeCard
-                icon="searchGlass"
+                icon="l3"
                 title="Curated for Quality"
                 description=" Enjoy only the best, handpicked novels, all at your fingertips."
               />
@@ -270,6 +263,12 @@ function App() {
           </span>
         </div>
       </section>
+      {openModal && (
+        <WelcomeLitpadModal
+          onClose={() => setOpenModal(false)}
+          openModal={openModal}
+        />
+      )}
     </main>
   );
 }
