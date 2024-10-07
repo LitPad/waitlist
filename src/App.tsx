@@ -4,6 +4,7 @@ import HomeCard from "./components/shared/HomeCard";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import axios from "axios";
+import SocialLink from "./components/shared/SocialLink";
 
 function App() {
   const baseURL = import.meta.env.VITE_API_URL;
@@ -27,10 +28,16 @@ function App() {
 
   const fetchBookGenre = async () => {
     setLoading(true);
-    const resonse = await axios.get(`${baseURL}/books/genres`);
-    setLoading(false);
-    setBookGenre(resonse.data.data);
-    console.log(resonse);
+    try {
+      const response = await axios.get(`${baseURL}/books/genres`);
+      setBookGenre(response.data.data);
+      console.log(response);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleJoinWaitlist = async () => {
@@ -121,8 +128,8 @@ function App() {
             discover meaningful content
           </span>
           <p className="text-[#7F7589] text-[14px] lg:text-[18px] font-[500] mb-[24px] max-w-[510px] text-wrap text-center px-4 pt-10 ">
-            Empower authors with creative control, offer readers a diverse
-            literacy experience, ensure transparency in revenue sharing
+            LitPad offers you unlimited access to an ever-growing library of
+            quality novels, all for one budget-friendly subscription
           </p>
           <button
             onClick={scrollToJoinWaitlist}
@@ -137,25 +144,27 @@ function App() {
       <section className="h-[1800px] lg:h-[1352px] bg-gradient-to-b to-[#C198EC] from-[#FFFFFF] rounded-bl-[32px] rounded-br-[32px] lg:rounded-br-[60px] lg:rounded-bl-[60px]">
         <div className="border border-[#E0DEE3] bg-white mx-[16px] lg:m-[60px] flex flex-col rounded-[32px] lg:rounded-[50px] py-[36px] lg:py-[70px] lg:px-[24px]">
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-[32px] text-[#2B1744]">With LitPad</h2>
+            <h2 className="text-[32px] text-[#2B1744]">
+              Spend Less, Read More
+            </h2>
 
             {/* Cards */}
             <div className="mt-[40px] lg:mt-[80px] px-[16px] flex flex-col lg:flex-row items-center justify-between gap-[24px]">
               <HomeCard
                 icon="penTwo"
-                title="Author-Friendly Platform"
-                description="Providing authors with tools and resources to publish, promote, and
-          monetize their work while retainning creative control"
+                title="Endless Adventures at Your Fingertips"
+                description="Unlock a vast collection of novels across multiple genres—romance, fantasy, thrillers, and more.
+"
               />
               <HomeCard
                 icon="bookTwo"
-                title="Reader-Centric Experience"
-                description="Curating a diverse selection of literacy content across genres and empowering readers to discover, engage with, and support their favorite authors"
+                title="Affordable Escapes for Every Reader"
+                description="Escaping into another world doesn’t have to be costly. LitPad offers a sea of stories for one affordable monthly subscription."
               />
               <HomeCard
                 icon="searchGlass"
-                title="Transparency and fairness"
-                description="Implementing transparent revenue-sharing models and fostering a community built on trust and collaboration"
+                title="Curated for Quality"
+                description=" Enjoy only the best, handpicked novels, all at your fingertips."
               />
             </div>
           </div>
@@ -170,7 +179,8 @@ function App() {
             </h2>
             <div className="px-10">
               <p className="text-[15px] lg:text-[20px] text-[#2B1744] font-[500] text-center pt-4">
-                Welcome to the future of novels, crafted for authors and readers
+                Join the waitlist now for early access to unlimited stories.
+                Your next favorite read awaits!
               </p>
             </div>
           </div>
@@ -205,7 +215,7 @@ function App() {
               className="bg-[#F6F5F6] rounded-[46px] h-[44px] px-2 placeholder:text-muted-foreground text-[#2B1744] font-[500]"
             >
               <option>{loading ? "Loading..." : "Select genre"}</option>
-              {bookGenre.map((genre: any) => (
+              {bookGenre?.map((genre: any) => (
                 <option key={genre.slug} value={genre.slug}>
                   {genre.name}
                 </option>
@@ -215,7 +225,7 @@ function App() {
               type="submit"
               className="bg-btn-purple-gradient rounded-[46px] text-white"
             >
-              {updatingWaitList ? "Loading..." : "Join Waitlist"}
+              {updatingWaitList ? "Loading..." : "Join Now"}
             </Button>
           </form>
         </div>
@@ -230,36 +240,33 @@ function App() {
                 className="w-[125px] p-2 hover:cursor-pointer"
               />
               <span className="text-[#2B1744] text-center text-[14px] md:text-[18px] font-[500]">
-                Write, read, and enjoy quality stories without limits
+                Enjoy Quality Stories Without Limits.
               </span>
             </div>
             <div className="flex items-center gap-[20px] mt-[24px]">
-              <img
-                src="/assets/icons/x.svg"
-                alt="logo"
-                className="p-2 hover:cursor-pointer"
+              <SocialLink
+                href="https://x.com/LitPadHQ"
+                icon="/assets/icons/x.svg"
               />
-              <img
-                src="/assets/icons/in.svg"
-                alt="logo"
-                className="p-2 hover:cursor-pointer"
+              <SocialLink
+                href="https://www.linkedin.com/company/litpad/"
+                icon="/assets/icons/in.svg"
               />
-              <img
-                src="/assets/icons/fb.svg"
-                alt="logo"
-                className="p-2 hover:cursor-pointer"
+              <SocialLink
+                href="https://www.facebook.com/LitPadHQ"
+                icon="/assets/icons/fb.svg"
               />
-              <img
-                src="/assets/icons/ig.svg"
-                alt="logo"
-                className="p-2 hover:cursor-pointer"
+
+              <SocialLink
+                href="https://www.instagram.com/litpadhq"
+                icon="/assets/icons/ig.svg"
               />
             </div>
           </div>
         </div>
         <div className="flex items-center justify-center pt-[30px] pb-[100px]">
           <span className="text-[#7F7589] text-[12px] lg:text-[14px] font-[400]">
-            © 2024 All Rights reserved by LitPad
+            © 2024 LitPad Platforms. All rights reserved.
           </span>
         </div>
       </section>
