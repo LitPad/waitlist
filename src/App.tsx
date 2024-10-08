@@ -11,7 +11,7 @@ import HeroSection from "./components/shared/HeroSection";
 function App() {
   const baseURL = import.meta.env.VITE_API_URL;
 
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [updatingWaitList, setUpdatingWaitList] = useState(false);
   const [version, setVersion] = useState(0);
