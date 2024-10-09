@@ -23,16 +23,15 @@ const WelcomeLitpadModal = ({
           </div>
           <p className="text-[#7F7589] text-[14px] lg:text-[18px] font-[500] mb-[24px] max-w-[550px] text-wrap text-center px-4 mt-4">
             You're one step closer to unlocking thousands of captivating novels.
-            Great stories are even better with friends – share the adventure!
           </p>
           <div className="bg-[#F6F5F6] w-full px-[25px]  md:px-[70px] py-[20px] mb-6 rounded-[20px] flex flex-col items-center">
             <p className="text-[#7F7589] text-[14px] lg:text-[16px] font-[500] text-center mb-[16px]">
-              Want to help fellow book loves? Spread the word about litpad
+              Great stories are even better with friends – share the adventure!
             </p>
             <div className="flex flex-col gap-3">
               <ShareSocial
                 text="Share on Whatsapp"
-                img="ig.svg"
+                img="wsap.svg"
                 href="https://api.whatsapp.com/send?text=LitPad%20is%20launching%20a%20platform%20where%20readers%20can%20discover%20quality%20novels%20across%20all%20their%20favorite%20genres%20for%20an%20affordable%20fee.%20Join%20the%20waitlist%20here%3A%20join.litpad.app"
               />
               <ShareSocial
