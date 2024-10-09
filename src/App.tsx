@@ -102,7 +102,7 @@ function App() {
           </div>
         </header>
         {/* hero */}
-        <HeroSection onClick={() => setOpenModal(true)} />
+        <HeroSection onClick={scrollToJoinWaitlist} />
       </section>
 
       {/* Cards */}
