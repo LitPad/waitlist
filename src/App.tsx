@@ -90,9 +90,9 @@ function App() {
           </Button>
 
           <div className="hidden gap-4 md:flex">
-            <button className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 ">
+            {/* <button className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 ">
               About
-            </button>
+            </button> */}
             <button
               onClick={scrollToJoinWaitlist}
               className="text-[#493B56] text-[15px] font-[500] py-[13px] px-[18px] hover:text-slate-500 "
