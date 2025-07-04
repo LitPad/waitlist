@@ -1,12 +1,9 @@
-name: Deploy Waitlist to VPS
+name: Deploy Waitlist to AWS Lightsail
 
 on:
   push:
     branches:
       - main
-
-env:
-  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
 jobs:
   deploy:
@@ -16,48 +13,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sshpass expect rsync
-
-    - name: Setup SSH passphrase
+    - name: Setup SSH
       env:
-        SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        LIGHTSAIL_SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_PRIVATE_KEY }}
       run: |
-        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        echo 'echo $SSH_PASSPHRASE' > ~/.ssh_askpass && chmod +x ~/.ssh_askpass
-        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | DISPLAY=None SSH_ASKPASS=~/.ssh_askpass ssh-add - >/dev/null
-        echo "SSH key added"
+        mkdir -p ~/.ssh
+        echo "$LIGHTSAIL_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.LIGHTSAIL_IP }} >> ~/.ssh/known_hosts
 
     - name: Verify SSH Connection
-      env:
-        VPS_IP: ${{ secrets.VPS_IP }}
       run: |
-        sshpass -p "${{ secrets.SSH_PASSPHRASE }}" ssh -o StrictHostKeyChecking=no docker@${VPS_IP} "echo Connection successful"
+        ssh -i ~/.ssh/id_rsa ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_IP }} "echo Connection successful"
 
-    - name: Install rsync on VPS
-      env:
-        VPS_IP: ${{ secrets.VPS_IP }}
+    - name: Copy files to Lightsail
       run: |
-        sshpass -p "${{ secrets.SSH_PASSPHRASE }}" ssh -o StrictHostKeyChecking=no docker@${VPS_IP} << 'EOF'
-          sudo apt-get update
-          sudo apt-get install -y rsync
-        EOF
-
-    - name: Copy files to VPS
-      env:
-        VPS_IP: ${{ secrets.VPS_IP }}
-      run: |
-        sshpass -p "${{ secrets.SSH_PASSPHRASE }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ docker@${VPS_IP}:/waitlist
-        echo "Files copied to VPS"
+        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_IP }}:/waitlist
 
     - name: SSH and run Docker Compose
-      env:
-        VPS_IP: ${{ secrets.VPS_IP }}
       run: |
-        sshpass -p "${{ secrets.SSH_PASSPHRASE }}" ssh -o StrictHostKeyChecking=no docker@${VPS_IP} << 'EOF'
+        ssh -i ~/.ssh/id_rsa ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_IP }} << 'EOF'
           cd /waitlist
           docker-compose down
           docker-compose up --build -d --remove-orphans
